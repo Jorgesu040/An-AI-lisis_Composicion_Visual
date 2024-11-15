@@ -3,7 +3,6 @@ Este script extrae fotogramas de un archivo de video, los analiza usando la API 
 """
 
 import os
-from openai import OpenAI
 
 # Importar funciones de otros archivos
 from py_functions.video_processing import extract_frames, apply_rule_of_thirds
@@ -11,48 +10,39 @@ from py_functions.visual_api import analyze_with_openai, generate_openai_report
 from py_functions.report_generator import generate_pdf, generate_txt
 from py_functions.frame_api_encoder import encode_image
 
-os.environ['OPENAI_API_KEY'] = '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'
-
-client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-
 # Obtener parámetros del usuario
-video_path = 'frames/'
-output_frame_folder = 'analyse_frames/'
+video_path = os.path.join('video_input', input('Introduce el nombre del archivo de video (por ejemplo, video.mp4): '))
+output_frame_folder = 'frames/'
 # Obtener los prompts de análisis y contexto narrativo
 prompt_analisis_file = "" # Ruta al archivo del prompt de análisis
 prompt_contexto_narrativo = "" # Guardar el prompt de contexto narrativo (opcional)
 
-responses = [] # Almacenar el análisis de cada fotograma
 prompt_analisis = "" # Prompt global (este combina los distintos prompts que guian al modelo)
+responses = [] # Almacenar el análisis de cada fotograma
 
-os.path.join(os.getcwd(), input('Introduce la ruta al archivo del prompt de análisis (obligatorio): '))
+# Leer el prompt de análisis
+prompt_analisis_file = os.path.join('fine-tunning_files', input('Introduce la ruta al archivo del prompt de análisis (obligatorio): '))
 
 # Leer el prompt de contexto narrativo si se proporciona
-prompt_contexto_narrativo_file = os.path.join(os.getcwd(), input('Introduce la ruta al archivo del prompt de contexto narrativo (opcional, presiona Enter para omitir): '))
-if prompt_contexto_narrativo_file:
-    with open(prompt_contexto_narrativo_file, "r", encoding="utf-8") as file:
-        prompt_contexto_narrativo = file.read()
-else:
-    prompt_contexto_narrativo = ""
+prompt_contexto_narrativo_file = os.path.join('fine-tunning_files', input('Introduce la ruta al archivo del prompt de contexto narrativo (opcional, presiona Enter para omitir): '))
 
-# Leer los prompts de los archivos
-with open(prompt_analisis_file, "r", encoding="utf-8") as file:
-    prompt_analisis = file.read()
-
-
-if prompt_contexto_narrativo_file != "\n":
+if prompt_contexto_narrativo_file != "fine-tunning_files\\":
     with open(prompt_contexto_narrativo_file, "r", encoding="utf-8") as file:
         prompt_contexto_narrativo = file.read()
 else:
     print("Para mejorar la calidad de los análisis, se recomienda proporcionar un prompt de contexto narrativo.")
+
+
+# Leer los prompts de los archivos
+with open(prompt_analisis_file, "r", encoding="utf-8") as file:
+    prompt_analisis = file.read()
     
 def main():
     """
     Función principal para orquestar la extracción de fotogramas, análisis y generación de informes.
     """
-
     # Preguntar al usuario por la frecuencia con la que se extraerán los fotogramas
-    frame_interval = int(input('Introduce el intervalo entre fotogramas en segundos: '))
+    frame_interval = int(input('Introduce el intervalo de captura de fotogramas en segundos: '))
     extracted_frames = extract_frames(video_path, output_frame_folder, frame_interval)
 
     # Contar el número de llamadas a la API que se realizarán

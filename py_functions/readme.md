@@ -14,6 +14,9 @@ Este directorio contiene funciones auxiliares utilizadas por `Main.py`.
 
 ### `visual_api.py`
 
+- **ESTE MODULO REQUIERE DE UNA CLAVE DE OPENAI (API key)**
+- Se puede conseguir en [OpenAI API](https://openai.com/index/openai-api/)
+
 - **Dependencias**:
   - `openai`
   - `os`

@@ -5,14 +5,16 @@ Este proyecto extrae fotogramas de un archivo de video, los analiza usando los m
 
 ## Estructura del Proyecto
 
-- **Archivo** `Main.py`: Script principal que orquesta la extracción de fotogramas, análisis y generación de informes.
-- **Carpeta** `py_functions/`: Carpeta que contiene funciones auxiliares usadas por el script principal.
 
-- **Carpeta** `video_input/`: Carpeta que contiene el archivo a analizar. El programa preguntará por el nombre del archivo en esa carperta.
+- **Archivo** [`Main.py`](Main.py): Script principal que orquesta la extracción de fotogramas, análisis y generación de informes.
+- **Carpeta** [`py_functions/`](py_functions/): Carpeta que contiene funciones auxiliares usadas por el script principal.
 
-- **Carpetas** `frames/` y `analized_frames/`: Guardan, respectivamente, los fotogramas extraídos y los fotogramas con transformaciones que son enviados como 'input' al modelo para analisis.
+- **Carpeta** [`video_input/`](video_input/): Carpeta que contiene el archivo a analizar. El programa preguntará por el nombre del archivo en esa carpeta.
 
-- **Carpeta** `fine-tunning_files`: Contiene los archivos encargados de guiar al modelo en el analisis de la composicion visual.
+- **Carpetas** [`frames/`](frames/) y [`analized_frames/`](analized_frames/): Guardan, respectivamente, los fotogramas extraídos y los fotogramas con transformaciones que son enviados como 'input' al modelo para análisis.
+
+- **Carpeta** [`fine-tunning_files`](fine-tunning_files): Contiene los archivos encargados de guiar al modelo en el análisis de la composición visual.
+
 
 ## Requisitos Previos
 
