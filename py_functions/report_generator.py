@@ -19,17 +19,17 @@ def generate_pdf(responses, output_folder, report, output_filename="analysis_rep
         
         # Add frame filename and timestamp
         pdf.set_font('pdf_font', 'B', 14)
-        pdf.cell(0, line_height, text=f"Frame: {item['frame']}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-        pdf.cell(0, line_height, text=f"Timestamp: {item['timestamp']} seconds", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.cell(0, line_height, text=f"Fotograma: {item['frame']}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
+        pdf.cell(0, line_height, text=f"Timestamp: {item['timestamp']} Segundos", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         pdf.set_font('pdf_font', '', 11)
         
         if os.path.exists(frame_path):
             pdf.image(frame_path, x=10, y=None, w=pdf.w - 20)
         else:
             pdf.cell(0, line_height, text="Image not found.", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
-
+        pdf.ln()
         pdf.multi_cell(0, line_height, text=item['analysis'], align='L', markdown=True)
-        pdf.ln(2) # Añade un espacio en blanco entre los análisis  
+        pdf.add_page() # Añaadir una nueva página para cada fotograma
 
     # Añadir un resumen del fragmento analizado
     pdf.add_page()

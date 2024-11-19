@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 
-os.environ['OPENAI_API_KEY'] = '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'
+os.environ['OPENAI_API_KEY'] = 'INTRODUCE_TU_API_KEY_AQUI'
 client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 def analyze_with_openai(encoded_image, prompt, current_frame, total_frames):
