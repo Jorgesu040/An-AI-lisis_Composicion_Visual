@@ -1,5 +1,5 @@
 
-# Py_Fundamentos_Comp_vis
+# AN-AI-LISIS DE LA COMPOSICION VISUAL
 
 Este proyecto extrae fotogramas de un archivo de video, los analiza usando los modelos de vision y lenguaje de OpenAI y genera un informe PDF.
 
